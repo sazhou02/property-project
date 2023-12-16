@@ -47,6 +47,7 @@ router.get('/order', order.getOrder)
 router.post('/order', order.createOrder)
 
 /* 车辆 */
+router.post('/getVehicle', vehicle.getVehicle)
 router.post('/vehicle', vehicle.createVehicle)
 router.post('/vehiclePhoto', vehicle.uploadImage)
 

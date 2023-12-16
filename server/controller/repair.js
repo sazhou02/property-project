@@ -26,7 +26,6 @@ exports.getRepair = async ctx => {
         return [...total, `${curr}="${query[curr]}"`]
     }, []).join(' and ')
     let $selectCount = `select count(*) from repair_list ${whereStr.length ? ' where ' + whereStr : ''}`
-    console.log($selectCount)
     const count = await model.operateSql($selectCount)
     let $selectRepair = `select repair_list.*,user.name,user.tel,room_num,building from (user right join room on user.room_id=room.id) right join repair_list on repair_list.user_id=user.id ${whereStr.length ? ' where ' + whereStr : ''} order by status desc limit ${limit} offset ${page * limit}`
     await model.operateSql($selectRepair).then(res => {
