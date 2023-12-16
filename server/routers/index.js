@@ -48,5 +48,6 @@ router.post('/order', order.createOrder)
 
 /* 车辆 */
 router.post('/vehicle', vehicle.createVehicle)
+router.post('/vehiclePhoto', vehicle.uploadImage)
 
 module.exports = router

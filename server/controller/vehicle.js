@@ -20,3 +20,28 @@ exports.createVehicle = async ctx => {
     }
   })
 }
+
+exports.uploadImage = async ctx => {
+  const imgData = ctx.request.body;
+  //过滤data:URL
+  const path = [];
+  for (let i = 0; i < imgData.length; i++) {
+    let base64Data = imgData[i].replace(/^data:image\/\w+;base64,/, "");
+    let dataBuffer = new Buffer(base64Data, 'base64');
+    let randomName = '/img/vehicle' + (new Date()).getTime() + parseInt(Math.random() * 8999 + 10000) + '.png';
+    await fs.writeFile('./files' + randomName, dataBuffer, function (err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+    path[i] = randomName
+  }
+
+  ctx.body = {
+    code: 20000,
+    msg: '更新成功',
+    data: {
+      path: path
+    }
+  }
+}

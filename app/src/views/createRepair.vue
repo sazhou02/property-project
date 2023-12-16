@@ -12,7 +12,7 @@
                     <van-icon class="del" color="#ff4444" size="15px" name="clear" @click="delPhoto(index)" />
                     <img :src="item" alt="" @click="preview(index)">
                 </div>
-                <van-uploader :after-read="onRead" multiple :max-size="307200" :oversize="oversize">
+                <van-uploader :after-read="onRead" multiple :max-size="307200" @oversize="oversize">
                     <van-icon name="photograph" />
                 </van-uploader>
             </van-cell>
