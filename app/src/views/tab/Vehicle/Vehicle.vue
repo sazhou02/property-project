@@ -8,11 +8,13 @@
 			<no-data v-if="vehicleList.length == 0" />
 			<template v-else>
 				<van-card v-for="(item, index) in vehicleList" :key="index" currency="" :price="item.license_number"
-					:desc="item.brand" :title="'停车位：' + item.parking"
+					:desc="'颜色：' + item.color" :title="'停车位：' + item.parking"
 					:thumb="item.photos && JSON.parse(item.photos).length != 0 ? JSON.parse(item.photos)[0] : defaultImg">
 					<div slot="footer">
-						<van-button size="mini">查看详情</van-button>
-						<van-button size="mini">删除</van-button>
+						<van-button size="mini" @click="handleDel(item.id)">删除</van-button>
+					</div>
+					<div slot="tags">
+						<span>品牌：{{ item.brand }}</span>
 					</div>
 				</van-card>
 			</template>
@@ -23,7 +25,7 @@
 
 <script>
 import noData from '@/components/noData';
-import { getVehicle } from '@/api/vehicle';
+import { getVehicle, deleteVehicle } from '@/api/vehicle';
 export default {
 	name: "Vehicle",
 	components: {
@@ -42,6 +44,25 @@ export default {
 		this.fetchData();
 	},
 	methods: {
+		handleDel(id) {
+			const _this = this;
+			this.$dialog.confirm({
+				title: '删除提示',
+				message: '确定删除该车辆信息吗？'
+			}).then(
+				async () => {
+					const res = await deleteVehicle({
+						id
+					})
+					if (res.data.code == 20000) {
+						this.$toast('删除成功');
+						_this.fetchData();
+					}
+				}
+			).catch(() => {
+				this.$toast('取消删除');
+			})
+		},
 		async fetchData() {
 			const vm = this
 			var res = await getVehicle({
@@ -49,7 +70,6 @@ export default {
 				licenseNumber: vm.licenseNumber
 			})
 			this.vehicleList = res.data.data;
-			console.log(this.vehicleList)
 		},
 		onClickRight() {
 			this.$router.push({

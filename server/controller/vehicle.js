@@ -47,6 +47,23 @@ exports.getVehicle = async ctx => {
   })
 }
 
+exports.deleteVehicle = async ctx => {
+  const { id } = ctx.request.body;
+  let $deleteVehicle = `delete from vehicle where id = ${id}`
+  try {
+    await model.operateSql($deleteVehicle);
+    ctx.body = {
+      code: 20000,
+      msg: '删除成功'
+    }
+  } catch (error) {
+    ctx.body = {
+      code: -1,
+      msg: '删除失败'
+    }
+  }
+}
+
 exports.updateVehicle = async ctx => {
   const { id, licenseNumber, brand, photos, color, parking } = ctx.request.body
   let updateParts = [];

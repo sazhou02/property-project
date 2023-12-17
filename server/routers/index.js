@@ -50,5 +50,6 @@ router.post('/order', order.createOrder)
 router.post('/getVehicle', vehicle.getVehicle)
 router.post('/vehicle', vehicle.createVehicle)
 router.post('/vehiclePhoto', vehicle.uploadImage)
+router.post('/deleteVehicle', vehicle.deleteVehicle)
 
 module.exports = router
