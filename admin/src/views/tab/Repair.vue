@@ -109,8 +109,7 @@
         columns = [{
                 title: '报修编号',
                 key: 'id',
-                width: 100,
-                fixed: 'left'
+                width: 100
             },{
                 title: '标题',
                 key: 'title',
@@ -215,6 +214,7 @@
                 key: 'action',
                 width: 200,
                 align: 'center',
+                fixed: 'right',
                 render: (h, params) => {
                     return h('div', [
                         h('Button', {

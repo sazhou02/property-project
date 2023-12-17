@@ -9,6 +9,10 @@
             <Icon type="ios-home" />
             <span>房间管理</span>
         </MenuItem>
+        <MenuItem name="Vehicle" :to="{name: 'Vehicle'}">
+            <Icon type="ios-car" />
+            <span>车辆管理</span>
+        </MenuItem>
         <Submenu name="User">
             <template slot="title">
                 <Icon type="ios-people" />

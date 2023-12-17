@@ -24,7 +24,7 @@ exports.createVehicle = async ctx => {
 exports.getVehicle = async ctx => {
   const { userId, licenseNumber } = ctx.request.body;
 
-  let $selectVehicle = `select * from vehicle where license_number like "%${licenseNumber}%" and user_id = "${userId}" order by create_time desc`
+  let $selectVehicle = `select vehicle.*,user.nick_name,user.tel from vehicle join user on vehicle.user_id=user.id where license_number like "%${licenseNumber}%" ${userId ? 'and user_id =' + userId : ''} order by create_time desc`
   console.log("$selectVehicle:", $selectVehicle);
   await model.operateSql($selectVehicle).then(res => {
     for (let i = 0; i < res.length; i++) {
@@ -32,7 +32,6 @@ exports.getVehicle = async ctx => {
         res[i].photos = JSON.stringify(JSON.parse(res[i].photos).map(item => `http://localhost:3000${item}`))
       }
     }
-    console.log("!!!!", res);
     ctx.body = {
       code: 20000,
       msg: '查询成功',
