@@ -6,7 +6,7 @@
             <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required />
         </van-cell-group>
         <van-button style="margin-top: 30px; width: 90%; left: 50%; transform: translate(-50%, 0)" @click="login">登陆</van-button>
-        <span>
+        <span class="register">
             <router-link style="text-decoration: underline #fff" :to="{path: '/register'}">点此注册</router-link>
         </span>
     </div>
@@ -64,7 +64,7 @@
         left: 50%; 
         transform: translate(-50%, 0);
     }
-    span {
+    .register {
         position: absolute;
         right: 5%;
         margin-top: 90px;

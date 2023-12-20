@@ -83,7 +83,7 @@ exports.getUserInfo = async ctx => {
 // 新建、更新和删除都调用一个接口
 exports.updateUser = async ctx => {
     let user = ctx.request.body
-    delete user.confirmPassword;
+    delete user.confirm_password;
     var $sql
 
     if (user.id) {
