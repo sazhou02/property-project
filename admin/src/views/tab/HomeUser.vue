@@ -62,6 +62,7 @@ import {
 	Prop,
 	Vue,
 } from 'vue-property-decorator';
+import md5 from 'js-md5'
 function deepClone(obj, hash = new WeakMap()) {
 	if (obj === null) return null; // 如果是null或者undefined我就不进行拷贝操作
 	if (obj instanceof Date) return new Date(obj);
@@ -269,6 +270,7 @@ export default class HomeUser extends Vue {
 					this.$Message.error('两次密码不一致');
 					return;
 				}
+				this.formModel.password = md5(password);
 				const res = await updateUser(this.formModel);
 				if (res.data.code === 20000) {
 					this.$Message.success('提交成功!');
