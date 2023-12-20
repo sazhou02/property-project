@@ -1,4 +1,5 @@
 const model = require('../lib/mysql.js')
+const { camelToSnake } = require('../utils/util.js');
 
 exports.login = async ctx => {
     let data = ctx.request.body
@@ -82,6 +83,7 @@ exports.getUserInfo = async ctx => {
 // 新建、更新和删除都调用一个接口
 exports.updateUser = async ctx => {
     let user = ctx.request.body
+    delete user.confirmPassword;
     var $sql
 
     if (user.id) {
@@ -109,7 +111,9 @@ exports.updateUser = async ctx => {
             return
         }
         let values = Object.values(user).map(item => `"${item}"`).toString()
-        $sql = `insert into user (${Object.keys(user).toString()}) value (${values})`
+        const snakeCaseKeys = Object.keys(user).map(item => camelToSnake(item)).toString();
+        console.log("add:::", snakeCaseKeys);
+        $sql = `insert into user (${snakeCaseKeys}) value (${values})`
     }
     console.log($sql)
     await model.operateSql($sql)
