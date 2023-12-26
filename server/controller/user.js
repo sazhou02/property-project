@@ -214,3 +214,21 @@ exports.checkPassword = async ctx => {
         }
     }
 }
+
+exports.feedback = async ctx => {
+    const { message, name, phone } = ctx.request.body;
+    const status = 0;
+    let $createFeedback = `insert into feedback (message, name, phone, status, create_time) value ("${message}","${name ? name : ''}",'${phone ? phone : ''}', ${status}, "${(new Date()).getTime()}")`
+    await model.operateSql($createFeedback).then(res => {
+        ctx.body = {
+            code: 20000,
+            msg: 'ok'
+        }
+    }).catch(err => {
+            console.log("err:", err)
+            ctx.body = {
+            code: -1,
+            msg: '提交失败'
+        }
+    })
+}

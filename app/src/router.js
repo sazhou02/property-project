@@ -72,6 +72,11 @@ export default new Router({
       path: '/createRepair',
       name: 'createRepair',
       component: () => import('./views/createRepair'),
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('./views/Feedback')
     }
   ],
 });

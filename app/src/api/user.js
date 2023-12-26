@@ -21,3 +21,7 @@ export const updateUserInfo = data => {
 export const checkPassword = info => {
     return http.get(`${domin}/checkPassword`, {params: info})
 }
+
+export const submitFeedback = data => {
+    return http.post(`${domin}/feedback`, data)
+}

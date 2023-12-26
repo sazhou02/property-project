@@ -26,6 +26,7 @@ router.post('/user/userInfo', user.updateUser)
 router.post('/user/userToOwner', user.userToOwner)
 router.get('/userList', user.getUserList)
 router.get('/user/checkPassword', user.checkPassword)
+router.post('/user/feedback', user.feedback)
 
 /* 家庭房屋信息 */
 router.get('/room', room.getRoom)
