@@ -34,6 +34,10 @@
             <MenuItem name="Part" :to="{name: 'Part'}"><Icon type="ios-build" /><span>零件管理</span></MenuItem>
             <MenuItem name="Order" :to="{name: 'Order'}"><Icon type="ios-build" /><span>出库管理</span></MenuItem>
         </Submenu>
+        <MenuItem name="Feedback" :to="{name: 'Feedback'}">
+            <Icon type="md-information-circle" />
+            <span>业主反馈</span>
+        </MenuItem>
         <MenuItem v-if="$store.state.user.role == 1" name="Admin" :to="{name: 'Admin'}">
             <Icon type="logo-octocat" />
             <span>管理员管理</span>

@@ -215,7 +215,7 @@ exports.checkPassword = async ctx => {
     }
 }
 
-exports.feedback = async ctx => {
+exports.createFeedback = async ctx => {
     const { message, name, phone } = ctx.request.body;
     const status = 0;
     let $createFeedback = `insert into feedback (message, name, phone, status, create_time) value ("${message}","${name ? name : ''}",'${phone ? phone : ''}', ${status}, "${(new Date()).getTime()}")`
@@ -229,6 +229,43 @@ exports.feedback = async ctx => {
             ctx.body = {
             code: -1,
             msg: '提交失败'
+        }
+    })
+}
+
+exports.getFeedback = async ctx => {
+    const { name } = ctx.request.body;
+    let $selectVehicle = `select * from feedback where name like "%${name}%" order by create_time desc`
+    console.log("$selectVehicle:", $selectVehicle);
+    await model.operateSql($selectVehicle).then(res => {
+        ctx.body = {
+        code: 20000,
+        msg: '查询成功',
+        data: res
+        }
+    }).catch(err => {
+        console.log(err)
+        ctx.body = {
+        code: -1,
+        msg: '查询失败'
+        }
+    })
+}
+
+exports.updateFeedback = async ctx => {
+    const { id } = ctx.request.body;
+    const status = 1;
+    let $updateFeedback = `update feedback set status="${status}" where id="${id}"`;
+
+    await model.operateSql($updateFeedback).then(res => {
+        ctx.body = {
+        code: 20000,
+        msg: '更新成功'
+        }
+    }).catch(err => {
+        ctx.body = {
+        code: -1,
+        msg: '更新失败'
         }
     })
 }

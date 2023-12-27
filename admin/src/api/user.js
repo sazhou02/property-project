@@ -21,3 +21,11 @@ export const updateUserInfo = data => {
 export const checkPassword = info => {
     return http.get(`${domin}/checkPassword`, {params: info})
 }
+
+export const getFeedback = data => {
+    return http.post("user/getFeedback", data)
+}
+
+export const updateFeedbackStatus = data => {
+    return http.post("user/updateFeedback", data)
+}

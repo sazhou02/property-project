@@ -162,11 +162,11 @@
                     }
                 },
                 "android": {
-                    "mdpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png", /*普通屏程序图标，分辨率：48x48*/
-                    "ldpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png", /*大屏程序图标，分辨率：48x48*/
-                    "hdpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png", /*高分屏程序图标，分辨率：72x72*/
-                    "xhdpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png",/*720P高分屏程序图标，分辨率：96x96*/
-                    "xxhdpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png","xxxhdpi":"C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/logo.png"/*1080P 高分屏程序图标，分辨率：144x144*/
+                    "mdpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png",/*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png","xxxhdpi":"C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/logo.png"/*1080P 高分屏程序图标，分辨率：144x144*/
                 }
             },
             "splashscreen": {
@@ -195,7 +195,7 @@
                     "ldpi": "", /*大屏启动图片，分辨率：320x442*/
                     "hdpi": "", /*高分屏启动图片，分辨率：480x762*/
                     "xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-                    "xxhdpi": "C:/Users/李志鹏/Desktop/pro/property_mangement/app/src/assets/main_bg.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
+                    "xxhdpi": "C:/Users/Zsa/Desktop/pro/property_mangement/app/src/assets/main_bg.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
                 }
             },"debug":true
         }
