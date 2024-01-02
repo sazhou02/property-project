@@ -3,15 +3,15 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50723
+ Source Server Version : 80031 (8.0.31)
  Source Host           : localhost:3306
  Source Schema         : property_management
 
  Target Server Type    : MySQL
- Target Server Version : 50723
+ Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 24/10/2018 18:57:33
+ Date: 29/12/2023 11:02:58
 */
 
 SET NAMES utf8mb4;
@@ -22,12 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_token`;
 CREATE TABLE `admin_token`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `deadline` bigint(13) NOT NULL,
-  `admin_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `deadline` bigint NOT NULL,
+  `admin_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin_token
@@ -59,19 +59,25 @@ INSERT INTO `admin_token` VALUES (31, '1540365542629tokenddd', 1540970342629, 1)
 INSERT INTO `admin_token` VALUES (32, '1540365558604tokenddd', 1540970358604, 1);
 INSERT INTO `admin_token` VALUES (33, '1540370213589tokenddd', 1540975013589, 1);
 INSERT INTO `admin_token` VALUES (34, '1540378532582tokentestAdmin', 1540983332582, 3);
+INSERT INTO `admin_token` VALUES (35, '1701235762990tokenddd', 1701840562990, 1);
+INSERT INTO `admin_token` VALUES (36, '1701236476262tokentestEmployee', 1701841276262, 4);
+INSERT INTO `admin_token` VALUES (37, '1702879901420tokenddd', 1703484701420, 1);
+INSERT INTO `admin_token` VALUES (38, '1702964627574tokenddd', 1703569427574, 1);
+INSERT INTO `admin_token` VALUES (39, '1703051772155tokenddd', 1703656572155, 1);
+INSERT INTO `admin_token` VALUES (40, '1703645836854tokenddd', 1704250636854, 1);
 
 -- ----------------------------
 -- Table structure for admin_user
 -- ----------------------------
 DROP TABLE IF EXISTS `admin_user`;
 CREATE TABLE `admin_user`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `role` int(1) NOT NULL COMMENT '1：超级管理员\r\n2：管理员',
-  `isDel` int(1) UNSIGNED NOT NULL DEFAULT 0,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `role` int NOT NULL COMMENT '1：超级管理员\r\n2：管理员',
+  `isDel` int UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin_user
@@ -79,20 +85,42 @@ CREATE TABLE `admin_user`  (
 INSERT INTO `admin_user` VALUES (1, 'ddd', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 1, 0);
 INSERT INTO `admin_user` VALUES (2, 'ffffffff', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 1, 0);
 INSERT INTO `admin_user` VALUES (3, 'testAdmin', '670b14728ad9902aecba32e22fa4f6bd', 2, 0);
+INSERT INTO `admin_user` VALUES (4, 'testEmployee', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 2, 0);
+
+-- ----------------------------
+-- Table structure for feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `status` int NOT NULL,
+  `create_time` varchar(255) CHARACTER SET utf32 COLLATE utf32_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf32 COLLATE = utf32_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of feedback
+-- ----------------------------
+INSERT INTO `feedback` VALUES (2, 'test', 'loki', '13937678708', 1, '1703576397170');
+INSERT INTO `feedback` VALUES (3, '1156test', 'Mario', '15334707626', 1, '1703649408807');
+INSERT INTO `feedback` VALUES (4, '1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test1157test', 'Mario', '18835195259', 0, '1703649448143');
 
 -- ----------------------------
 -- Table structure for part
 -- ----------------------------
 DROP TABLE IF EXISTS `part`;
 CREATE TABLE `part`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `part_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `part_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `price` float(10, 2) NOT NULL,
-  `type_id` int(11) NOT NULL,
-  `isDel` int(11) NOT NULL DEFAULT 0,
-  `count` int(11) NOT NULL DEFAULT 0,
+  `type_id` int NOT NULL,
+  `isDel` int NOT NULL DEFAULT 0,
+  `count` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of part
@@ -107,12 +135,12 @@ INSERT INTO `part` VALUES (7, '一字改锥', 2.00, 5, 0, 949);
 -- ----------------------------
 DROP TABLE IF EXISTS `part_order`;
 CREATE TABLE `part_order`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `repair_id` int(11) NOT NULL,
-  `part_id` int(11) NOT NULL,
-  `count` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `repair_id` int NOT NULL,
+  `part_id` int NOT NULL,
+  `count` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of part_order
@@ -127,11 +155,11 @@ INSERT INTO `part_order` VALUES (4, 1, 7, 50);
 -- ----------------------------
 DROP TABLE IF EXISTS `part_type`;
 CREATE TABLE `part_type`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `isDel` int(1) NOT NULL DEFAULT 0,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `isDel` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of part_type
@@ -147,40 +175,41 @@ INSERT INTO `part_type` VALUES (5, '改锥', 0);
 -- ----------------------------
 DROP TABLE IF EXISTS `repair_list`;
 CREATE TABLE `repair_list`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `status` int(1) NOT NULL COMMENT '0：已撤消\r\n1：已报修\r\n2：已联系\r\n3：已派修\r\n4：已维修\r\n5：已缴费',
-  `photos` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `status` int NOT NULL COMMENT '0：已撤消\r\n1：已报修\r\n2：已联系\r\n3：已派修\r\n4：已维修\r\n5：已缴费',
+  `photos` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
   `price` float(10, 2) NULL DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  `create_time` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `appointment_time` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '派修时间',
-  `pay_time` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付时间',
+  `user_id` int NOT NULL,
+  `create_time` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `appointment_time` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '派修时间',
+  `pay_time` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '支付时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of repair_list
 -- ----------------------------
-INSERT INTO `repair_list` VALUES (1, 'title test', 5, '', NULL, 1, '1536751006000', '1539938939298', '1539939016396');
-INSERT INTO `repair_list` VALUES (7, '测试', 4, NULL, 123.00, 1, '1544444444444', '1539939062285', NULL);
-INSERT INTO `repair_list` VALUES (8, '不知道啥玩意坏了', 3, NULL, NULL, 3, '1555555555555', '1540377805723', NULL);
-INSERT INTO `repair_list` VALUES (29, '测试', 1, '[\"/img/repair153889045376411987.png\"]', 123.00, 2, '1538890457496', NULL, NULL);
-INSERT INTO `repair_list` VALUES (30, '测试1', 1, '[\"/img/repair153889059018213784.png\",\"/img/repair153889059018214899.png\"]', 20.00, 1, '1538890591262', NULL, NULL);
-INSERT INTO `repair_list` VALUES (31, '测试新增', 1, '[\"/img/repair153889087536812713.png\",\"/img/repair153889087536815888.png\"]', 123.00, 13, '1538890876510', NULL, NULL);
-INSERT INTO `repair_list` VALUES (32, '灯泡碎了', 4, '[\"/img/repair154037665688518226.png\"]', 2.00, 1, '1540376663565', '1540376775358', NULL);
+INSERT INTO `repair_list` VALUES (1, 'title test', 5, '', NULL, 1, '1701235006000', '1701235939298', '1701267016396');
+INSERT INTO `repair_list` VALUES (7, '测试', 5, NULL, 123.00, 1, '1702613745444', '1702700145285', '1702710945457');
+INSERT INTO `repair_list` VALUES (8, '不知道啥玩意坏了', 3, NULL, NULL, 3, '1702876545555', '1702894545723', NULL);
+INSERT INTO `repair_list` VALUES (29, '测试', 1, '[\"/img/repair153889045376411987.png\"]', 123.00, 2, '1702973745496', NULL, NULL);
+INSERT INTO `repair_list` VALUES (30, '测试1', 1, '[\"/img/repair153889059018213784.png\",\"/img/repair153889059018214899.png\"]', 20.00, 1, '1702973766262', NULL, NULL);
+INSERT INTO `repair_list` VALUES (31, '测试新增', 1, '[\"/img/repair153889087536812713.png\",\"/img/repair153889087536815888.png\"]', 123.00, 13, '1702973777510', NULL, NULL);
+INSERT INTO `repair_list` VALUES (32, '灯泡碎了', 4, '[\"/img/repair154037665688518226.png\"]', 2.00, 1, '1702973788565', '1702973788358', NULL);
+INSERT INTO `repair_list` VALUES (33, 'test1326', 4, '[\"/img/repair170123560288510612.png\"]', 1222.00, 1, '1701235610735', '1701235816000', NULL);
 
 -- ----------------------------
 -- Table structure for room
 -- ----------------------------
 DROP TABLE IF EXISTS `room`;
 CREATE TABLE `room`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `building` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `room_num` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `building` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `area` float(255, 0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of room
@@ -199,38 +228,40 @@ INSERT INTO `room` VALUES (8, '202a', '2', 60);
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `sex` int(1) NOT NULL COMMENT '0：男\r\n1：女',
-  `room_id` int(11) NOT NULL,
-  `role` int(1) NOT NULL DEFAULT 0 COMMENT '0：未审核\r\n1：家庭成员\r\n2：业主\r\n\r\n',
-  `isDel` int(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0：未删\r\n1：已删\r\n',
-  `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `nick_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `sex` int NOT NULL COMMENT '0：男\r\n1：女',
+  `room_id` int NOT NULL,
+  `role` int NOT NULL DEFAULT 0 COMMENT '0：未审核\r\n1：家庭成员\r\n2：业主\r\n\r\n',
+  `isDel` int UNSIGNED NOT NULL DEFAULT 0 COMMENT '0：未删\r\n1：已删\r\n',
+  `tel` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 't1', '王富贵', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 1, 3, 1, 0, '15444444445');
-INSERT INTO `user` VALUES (2, 't2', '张百万', '4693fbb215b8ca15a6900f0cfa164cdc', 1, 3, 2, 0, '15555555555');
+INSERT INTO `user` VALUES (1, 't1', '王富贵', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 1, 3, 2, 0, '15444444445');
+INSERT INTO `user` VALUES (2, 't2', '张百万', '4693fbb215b8ca15a6900f0cfa164cdc', 1, 3, 1, 0, '15555555555');
 INSERT INTO `user` VALUES (3, 't3', '萌新', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 0, 1, 2, 0, '13258787777');
-INSERT INTO `user` VALUES (13, 't4', '铁锤妹妹', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 0, 2, 1, 0, '13555555555');
-INSERT INTO `user` VALUES (16, 't6666', '测试新增', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 0, 1, 1, 0, '13333333333');
+INSERT INTO `user` VALUES (13, 't4', '铁锤妹妹', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 1, 2, 1, 0, '13555555555');
+INSERT INTO `user` VALUES (16, 't6666', '测试', '0b4e7a0e5fe84ad35fb5f95b9ceeac79', 0, 1, 1, 0, '13333333333');
+INSERT INTO `user` VALUES (20, 'carMan', 'Loki', 'e10adc3949ba59abbe56e057f20f883e', 0, 4, 1, 0, '18280594837');
+INSERT INTO `user` VALUES (21, 'test1226', 'Loki', 'e86fdc2283aff4717103f2d44d0610f7', 0, 8, 0, 0, '13711008046');
 
 -- ----------------------------
 -- Table structure for user_token
 -- ----------------------------
 DROP TABLE IF EXISTS `user_token`;
 CREATE TABLE `user_token`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `deadline` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `deadline` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `user_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 140 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 152 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_token
@@ -263,5 +294,39 @@ INSERT INTO `user_token` VALUES (136, '1538891310184tokent1', '1539496110184', 1
 INSERT INTO `user_token` VALUES (137, '1538891321427tokent6666', '1539496121427', 16);
 INSERT INTO `user_token` VALUES (138, '1539501785236tokent1', '1540106585236', 1);
 INSERT INTO `user_token` VALUES (139, '1540374109855tokent1', '1540978909855', 1);
+INSERT INTO `user_token` VALUES (140, '1701235569918tokent1', '1701840369918', 1);
+INSERT INTO `user_token` VALUES (141, '1702879881348tokent1', '1703484681348', 1);
+INSERT INTO `user_token` VALUES (142, '1703060546417tokencarMan', '1703665346417', 20);
+INSERT INTO `user_token` VALUES (143, '1703061180338tokent1', '1703665980338', 1);
+INSERT INTO `user_token` VALUES (144, '1703560454511tokent1', '1704165254511', 1);
+INSERT INTO `user_token` VALUES (145, '1703567980816tokent1', '1704172780816', 1);
+INSERT INTO `user_token` VALUES (146, '1703569191936tokent1', '1704173991936', 1);
+INSERT INTO `user_token` VALUES (147, '1703569313745tokentest1226', '1704174113745', 21);
+INSERT INTO `user_token` VALUES (148, '1703569385639tokent1', '1704174185639', 1);
+INSERT INTO `user_token` VALUES (149, '1703570011550tokent1', '1704174811550', 1);
+INSERT INTO `user_token` VALUES (150, '1703570525861tokent1', '1704175325861', 1);
+INSERT INTO `user_token` VALUES (151, '1703818853566tokent1', '1704423653566', 1);
+
+-- ----------------------------
+-- Table structure for vehicle
+-- ----------------------------
+DROP TABLE IF EXISTS `vehicle`;
+CREATE TABLE `vehicle`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `license_number` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `brand` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `photos` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
+  `color` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `parking` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `user_id` int NULL DEFAULT NULL,
+  `create_time` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf32 COLLATE = utf32_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of vehicle
+-- ----------------------------
+INSERT INTO `vehicle` VALUES (1, '津C 342423', 'CarMan', '[]', 'black', 'Pki 999', 1, '1702967199731');
+INSERT INTO `vehicle` VALUES (2, '津D 123123', 'Tesla', '[\"/img/vehicle170381890645515528.png\",\"/img/vehicle170381890645510032.png\"]', 'blue', 'PK 12312', 1, '1703818911159');
 
 SET FOREIGN_KEY_CHECKS = 1;
