@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 29/12/2023 11:02:58
+ Date: 10/01/2024 17:44:00
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `admin_token`  (
   `deadline` bigint NOT NULL,
   `admin_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of admin_token
@@ -65,6 +65,7 @@ INSERT INTO `admin_token` VALUES (37, '1702879901420tokenddd', 1703484701420, 1)
 INSERT INTO `admin_token` VALUES (38, '1702964627574tokenddd', 1703569427574, 1);
 INSERT INTO `admin_token` VALUES (39, '1703051772155tokenddd', 1703656572155, 1);
 INSERT INTO `admin_token` VALUES (40, '1703645836854tokenddd', 1704250636854, 1);
+INSERT INTO `admin_token` VALUES (41, '1704865410557tokenddd', 1705470210557, 1);
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -169,6 +170,29 @@ INSERT INTO `part_type` VALUES (2, '地漏', 0);
 INSERT INTO `part_type` VALUES (3, '板子', 0);
 INSERT INTO `part_type` VALUES (4, '灯泡', 0);
 INSERT INTO `part_type` VALUES (5, '改锥', 0);
+
+-- ----------------------------
+-- Table structure for payment
+-- ----------------------------
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pay_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `pay_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `amount` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `pay_method` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `pay_status` int NOT NULL,
+  `notes` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `create_time` varchar(255) CHARACTER SET utf32 COLLATE utf32_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf32 COLLATE = utf32_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of payment
+-- ----------------------------
+INSERT INTO `payment` VALUES (1, 'dianfei', '王富贵', '100', 'zhifubao', 0, '尽快缴纳！', 1, '1704878724109');
+INSERT INTO `payment` VALUES (2, 'nuanqifei', '萌新', '1111', 'weixin', 0, '快快快！！！', 3, '1704878806686');
 
 -- ----------------------------
 -- Table structure for repair_list

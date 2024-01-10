@@ -50,6 +50,14 @@ export default new Router({
           },
         },
         {
+          path: "Pay",
+          name: "Pay",
+          component: () => import("./views/tab/Pay"),
+          mate: {
+            title: "缴费信息",
+          },
+        },
+        {
           path: "repair",
           name: "Repair",
           component: () => import("./views/tab/Repair"),

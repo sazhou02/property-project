@@ -11,6 +11,7 @@ const repair = require('../controller/repair.js')
 const part = require('../controller/part.js')
 const order = require('../controller/order.js')
 const vehicle = require('../controller/vehicle.js')
+const pay = require('../controller/pay.js')
 
 /* 管理员 */
 router.post('/admin/login', admin.login)
@@ -54,5 +55,11 @@ router.post('/getVehicle', vehicle.getVehicle)
 router.post('/vehicle', vehicle.createVehicle)
 router.post('/vehiclePhoto', vehicle.uploadImage)
 router.post('/deleteVehicle', vehicle.deleteVehicle)
+
+/* 缴费 */
+router.post('/getPayment', pay.getPayment)
+router.post('/payment', pay.createPayment)
+router.post('/deletePayment', pay.deletePayment)
+router.post('/updatePayment', pay.updatePayment)
 
 module.exports = router
