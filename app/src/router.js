@@ -56,6 +56,10 @@ export default new Router({
         path: '/me',
         name: 'me',
         component: () => import('./views/tab/Me')
+      }, {
+        path: '/pay',
+        name: 'pay',
+        component: () => import('./views/tab/pay')
       }]
     },
     {

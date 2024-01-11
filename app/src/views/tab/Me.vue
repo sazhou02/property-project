@@ -12,7 +12,9 @@
             <van-field required label="姓名" v-model="userInfo.nick_name" placeholder="请输入姓名" />
             <van-field required label="手机号" v-model="userInfo.tel" placeholder="请输入手机号" :error-message="/^1[34578]\d{9}$/.test(userInfo.tel) ? '' : '手机号格式错误'" />
         </van-cell-group>
-        <van-button type="danger" style="width: 90%; postition: absolute; left: 50%; transform: translate(-50%, 20px)"
+        <van-button type="primary" style="width: 90%; postition: absolute; left: 50%; transform: translate(-50%, 20px)"
+            @click="viewMembers">查看家庭成员</van-button>
+        <van-button type="danger" style="width: 90%; margin-top: 10px; postition: absolute; left: 50%; transform: translate(-50%, 20px)"
             @click="logOut">退出登录</van-button>
         <van-dialog v-model="dialogShow" show-cancel-button close-on-click-overlay :before-close="beforeClose">
             <van-field v-model="oldPassword" type="password" label="原密码" placeholder="请输入原密码">
@@ -99,6 +101,11 @@
             await this.$store.dispatch('LOG_OUT')
             this.$router.push({
                 path: '/login'
+            })
+        }
+        viewMembers() {
+            this.$router.push({
+                path: '/homeUser'
             })
         }
     }

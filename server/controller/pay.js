@@ -22,7 +22,7 @@ exports.createPayment = async ctx => {
 exports.getPayment = async ctx => {
   const { payName, userId } = ctx.request.body;
 
-  let $selectPayment = `select payment.*,user.nick_name from payment join user on payment.user_id=user.id where pay_name like "%${payName}%" ${userId ? 'and user_id =' + userId : ''} order by create_time desc`
+  let $selectPayment = `select payment.*,user.nick_name from payment join user on payment.user_id=user.id where pay_name like "%${payName ? payName : ''}%" ${userId ? 'and user_id =' + userId : ''} order by create_time desc`
   console.log("$selectVehicle:", $selectPayment);
   await model.operateSql($selectPayment).then(res => {
     ctx.body = {
@@ -69,7 +69,7 @@ exports.updatePayment = async ctx => {
     updateParts.push(`pay_method='${payMethod}'`)
   };
   if (payStatus) {
-    updateParts.push(`payStatus='${1}'`)
+    updateParts.push(`pay_status='${payStatus}'`)
   };
   if (notes) {
     updateParts.push(`notes='${notes}'`)

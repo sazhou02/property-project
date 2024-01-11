@@ -34,9 +34,9 @@
             icon: 'setting-o',
             name: 'repair'
         }, {
-            label: '家庭成员',
-            icon: 'friends-o',
-            name: 'homeUser'
+            label: '缴费',
+            icon: 'balance-o',
+            name: 'pay'
         }, {
             label: '个人信息',
             icon: 'contact',
