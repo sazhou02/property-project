@@ -8,7 +8,7 @@
       <Spin size="large" fix v-if="spinShow"></Spin>
     </div>
 
-    <Modal v-model="modalVisible" title="新增缴费">
+    <Modal v-model="modalVisible" title="新增缴费" @on-visible-change="visibleChange">
 
       <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
         <FormItem label="缴费类型" prop="payType">
@@ -50,12 +50,14 @@
 </template>
 
 <script>
-import { getPayment, createPayment } from "@/api/pay";
+import { getPayment, createPayment, updatePayment, deletePayment } from "@/api/pay";
 import { getHomeUsers } from "@/api/homeUsers";
+import { deepClone, keysToCamelCase } from "../../utils/utils";
 export default {
   name: "Vehicle",
   data() {
     return {
+      modalAction: "add",
       userOptions: [],
       modalVisible: false,
       spinShow: false,
@@ -99,7 +101,7 @@ export default {
         },
         {
           title: "缴费人姓名",
-          key: "pay_name",
+          key: "nick_name",
           align: "center",
         },
         {
@@ -239,18 +241,31 @@ export default {
       this.spinShow = false;
     },
     handleAdd() {
+      this.modalAction = 'add';
       this.modalVisible = true;
     },
     handleSubmit(name) {
       this.$refs[name].validate(async (valid) => {
         if (valid) {
-          const { data } = await createPayment(this.formValidate);
-          if (data.code === 20000) {
-            this.$Message.success('创建成功!');
-            this.modalVisible = false;
-            this.loadData();
-          } else {
-            this.$Message.error('Fail!');
+          try {
+            let data;
+            // 根据 modalAction 类型调用相应的 API 函数
+            if (this.modalAction === 'add') {
+              ({ data } = await createPayment(this.formValidate));
+            } else {
+              ({ data } = await updatePayment(this.formValidate));
+            }
+
+            if (data.code === 20000) {
+              this.$Message.success(`${this.modalAction === 'add' ? '创建' : '更新'}成功!`);
+              this.modalVisible = false;
+              this.loadData();
+            } else {
+              this.$Message.error(`操作失败: ${data.msg}`);
+            }
+          } catch (error) {
+            // 捕获并处理 try 块中的任何异常
+            this.$Message.error(`请求过程中发生错误: ${error}`);
           }
         } else {
           this.$Message.error('Fail!');
@@ -263,11 +278,38 @@ export default {
     nameChange(val) {
       this.formValidate.payName = val.label;
     },
+    visibleChange(val) {
+      if (!val) {
+        this.handleReset('formValidate');
+      }
+    },
     handleEdit(row) {
-      console.log(row);
+      this.modalAction = 'edit';
+      const editObj = deepClone(row);
+      this.formValidate = keysToCamelCase(editObj);
+      console.log(this.formValidate);
+      this.modalVisible = true;
     },
     handleDel(row) {
-      console.log(row);
+      this.$Modal.confirm({
+        title: '提示',
+        content: '<p>确认删除该条数据吗？</p>',
+        onOk: async () => {
+          try {
+            const { data } = await deletePayment({ id: row.id }
+            );
+            if (data.code === 20000) {
+              this.$Message.success('删除成功!');
+              this.loadData();
+            } else {
+              this.$Message.error(`操作失败: ${data.msg}`);
+            }
+          } catch (error) {
+            // 捕获并处理 try 块中的任何异常
+            this.$Message.error(`请求过程中发生错误: ${error}`);
+          }
+        }
+      });
     }
   }
 }

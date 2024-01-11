@@ -78,7 +78,7 @@ exports.updatePayment = async ctx => {
     updateParts.push(`user_id='${userId}'`)
   };
   let updateSetClause = updateParts.join(',');
-  let $updatePayment = `update vehicle set ${updateSetClause} where id="${id}"`;
+  let $updatePayment = `update payment set ${updateSetClause} where id="${id}"`;
 
   await model.operateSql($updatePayment).then(res => {
     ctx.body = {
@@ -86,6 +86,7 @@ exports.updatePayment = async ctx => {
       msg: '更新成功'
     }
   }).catch(err => {
+    console.log("error:", err);
     ctx.body = {
       code: -1,
       msg: '更新失败'
